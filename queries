@@ -1,0 +1,47 @@
+SELECT *
+FROM pizza_topping;
+
+SELECT * FROM crust WHERE crustId = 1;
+
+UPDATE crust SET crust_name = 'Super', price = '1.0' WHERE crust_id = 3;
+
+UPDATE sale SET sale_status = 'pending', sale_total = '22.50' WHERE sale_id = 7;
+
+UPDATE sale SET customer_address = '100 Mordor Mt' WHERE sale_id = 7;
+
+INSERT INTO crust (crust_name, price) VALUES ('New Crust', 10.0);
+
+SELECT *
+FROM sale;
+
+SELECT *
+FROM specialty_topping;
+
+SELECT *
+FROM specialty_pizza;
+
+SELECT topping_name
+FROM pizza
+JOIN pizza_topping ON pizza.pizza_id = pizza_topping.pizza_id
+JOIN toppings ON pizza_topping.topping_id = toppings.topping_id
+WHERE pizza.pizza_id = 1;
+
+SELECT pizza_name, topping_name
+FROM specialty_pizza
+JOIN specialty_topping ON specialty_pizza.specialty_id = specialty_topping.specialty_id
+JOIN toppings ON specialty_topping.topping_id = toppings.topping_id
+WHERE specialty_pizza.specialty_id = 2;
+
+SELECT * FROM crust;
+
+INSERT INTO sale ( is_delivery, customer_address, cc_last_four) 
+                VALUES (false,'100 Mordor Mt Rd',1234) returning sale_id;
+				
+INSERT INTO pizza (sale_status, sale_total, is_delivery, customer_address, cc_last_four) 
+                VALUES ('pending',1.0,true,'12 Lane',1234) returning sale_id;
+				
+SELECT *
+FROM pizza;
+
+DELETE FROM sale WHERE sale_id = 10;
+
